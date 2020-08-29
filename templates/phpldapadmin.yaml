@@ -23,7 +23,7 @@ spec:
   replicas: {{.Values.OpenLdap.Replicas}}
   selector:
     matchLabels:
-      app: {{.Release.Name}}
+      app: {{.Release.Name}}-admin
   template:
     metadata:
       labels:
