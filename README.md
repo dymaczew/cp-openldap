@@ -1,25 +1,24 @@
 ## OpenLDAP
 
-Installs OpenLDAP and phpLDAPadmin with a small number of initial users for the purposes of demonstrating LDAP integration capabilities of ICP.
+Installs OpenLDAP and phpLDAPadmin with a small number of initial users for the purposes of demonstrating LDAP integration capabilities of IBM Cloud Paks.
 
+Forked from https://github.com/ibm-cloud-architecture/icp-openldap
+
+Updated to work with new versions of Kubernetes (>=1.16.x)
 
 ## Installation
 To install the chart, you'll need the [helm cli](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/app_center/create_helm_cli.html?view=kc) and the [IBM Cloud Private CLI](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/manage_cluster/install_cli.html?view=kc). Note: the IBM Cloud Private CLI version level must match the version level that is downloadable via your ICP console, under ***Menu > Command Line Tools > Cloud Private CLI***.
 
 1. Get the source code of the helm chart
-   `git clone https://github.com/ibm-cloud-architecture/icp-openldap.git`
+   `git clone https://github.com/dymaczew/cp-openldap.git`
 2. Package the helm chart using the helm cli
-   `helm package icp-openldap`
-3. If you have not, log in to your cluster from the IBM® Cloud Private CLI and log in to the Docker private image registry.
-   `bx pr login -a https://<cluster_CA_domain>:8443 --skip-ssl-validation`
-    Where cluster_CA_domain is the certificate authority (CA) domain. If you did not specify a CA domain, the default value is mycluster.icp. 
-4. Install the Helm chart
-   `bx pr load-helm-chart --archive <helm_chart_archive> [--clustername <cluster_CA_domain>]`
-   Where helm_chart_archive is the name of your compressed Helm chart file and <cluster_CA_domain> is the certificate authority (CA) domain.
-5. Update the package repository by using the IBM® Cloud Private cluster management console.
-   1. From the IBM® Cloud Private management console, click ***Menu > Manage > Helm Repositories***.
-   2. Click Sync Repositories.
-   3. In the upper right hand corner of the screen click ***Catalog*** The new Helm charts load into the Catalog, and you can install them into your cluster.
+   `helm package cp-openldap`
+3. If you have not, log in to your cluster from the IBM® Cloudak CLI and log in to the Docker private image registry.
+   `cloudctl login -a https://<cluster_domain> --skip-ssl-validation`
+4a. If you have Tiller available (CloudPak for MCM 1.3 or 2.0) install the Helm chart using helm v2 cli 
+   `helm install --name ldap-slap --namespace kube-public --values cp-openldap/values.yaml --tls`
+4b. For other CloudPaks render the chart and apply using oc apply
+   `helm template --name ldap-slap --namespace kube-public --values cp-openldap/values.yaml | kubectl apply -f -`
 
 ## Assets
 
