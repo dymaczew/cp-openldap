@@ -21,6 +21,9 @@ metadata:
   name: {{.Release.Name}}-admin
 spec:
   replicas: {{.Values.OpenLdap.Replicas}}
+  selector:
+    matchLabels:
+      app: {{.Release.Name}}
   template:
     metadata:
       labels:
