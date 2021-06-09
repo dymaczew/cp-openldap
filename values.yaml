@@ -1,4 +1,6 @@
 OpenLdap:
+  project: "ldap"
+  serviceAccount: "ldap"
   Image: "docker.io/osixia/openldap"
   ImageTag: "1.1.10"
   ImagePullPolicy: "Always"
