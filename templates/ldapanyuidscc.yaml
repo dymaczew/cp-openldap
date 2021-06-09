@@ -18,7 +18,7 @@ metadata:
     include.release.openshift.io/self-managed-high-availability: "true"
     kubernetes.io/description: anyuid provides all features of the restricted SCC but allows users to run with any UID and any GID.
     release.openshift.io/create-only: "true"
-  name: ldapanyuidscc
+  name: {{.Values.General.sccName}}
 priority: 50
 readOnlyRootFilesystem: false
 requiredDropCapabilities:
@@ -30,7 +30,7 @@ seLinuxContext:
 supplementalGroups:
   type: RunAsAny
 users:
-- system:serviceaccount:{{.Values.OpenLdap.project}}:{{.Values.OpenLdap.serviceAccount}}
+- system:serviceaccount:{{.Values.General.project}}:{{.Values.General.serviceAccount}}
 volumes:
 - configMap
 - downwardAPI

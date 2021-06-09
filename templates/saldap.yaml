@@ -3,4 +3,4 @@ kind: ServiceAccount
 metadata:
   creationTimestamp: null
   name: ldap
-  namespace: {{.Values.OpenLdap.project}}
+  namespace: {{.Values.General.project}}
