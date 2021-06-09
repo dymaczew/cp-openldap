@@ -24,6 +24,18 @@ To install the chart, you'll need the [helm cli](https://www.ibm.com/support/kno
 
 Kubernetes Assets in this chart.
 
+**General Settings**
+General settings
+
+default values below
+
+```
+General:
+  project: "ldap"
+  serviceAccount: "ldap"
+  sccName: "ldapanyuidscc"
+```
+
 **OpenLDAP**
 OpenLDAP
 
