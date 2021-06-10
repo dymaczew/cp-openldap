@@ -8,27 +8,25 @@ Updated to work with new versions of Kubernetes (>=1.16.x)
 
 ## Installation
 
-To install the chart, you'll need the [helm cli](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/app_center/create_helm_cli.html?view=kc) and the [IBM Cloud Private CLI](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/manage_cluster/install_cli.html?view=kc). Note: the IBM Cloud Private CLI version level must match the version level that is downloadable via your ICP console, under ***Menu > Command Line Tools > Cloud Private CLI***.
+To install the chart, you'll need the `helm` and `oc` or `kubectl` and authenticated comnnection to your cluster.
 
 1. Get the source code of the helm chart
 
    `git clone https://github.com/dymaczew/cp-openldap.git`
 
-2. Package the helm chart using the helm cli
+2. If you have not, log in to your cluster 
 
-   `helm package cp-openldap`
-
-3. If you have not, log in to your cluster from the IBM® Cloudak CLI and log in to the Docker private image registry.
-
-   `cloudctl login -a https://<cluster_domain> --skip-ssl-validation`
-
-4. If you have Tiller available (CloudPak for MCM 1.3 or 2.0) install the Helm chart using helm v2 cli 
+3. For old Cloud Paks with Tiller available (e.g. CloudPak for MCM 1.3 or 2.0) install the Helm chart using helm v2 cli 
 
    `helm install --name ldap-slap --namespace kube-public --values cp-openldap/values.yaml --tls`
 
-   For other CloudPaks render the chart and apply using oc apply
+   You can also render the chart locally and apply using oc apply
 
    `helm template --name ldap-slap --namespace kube-public --values cp-openldap/values.yaml | kubectl apply -f -`
+
+4. For new IBM Cloud Pak foundational services (3.5 or newer) and helm v3, install with the following command
+  
+   `helm install ldap-slap ./cp-openldap -n ldap --values ./cp-openldap/values.yaml`
 
 ## Assets
 
