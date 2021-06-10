@@ -7,6 +7,7 @@ Forked from https://github.com/ibm-cloud-architecture/icp-openldap
 Updated to work with new versions of Kubernetes (>=1.16.x)
 
 ## Installation
+
 To install the chart, you'll need the [helm cli](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/app_center/create_helm_cli.html?view=kc) and the [IBM Cloud Private CLI](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/manage_cluster/install_cli.html?view=kc). Note: the IBM Cloud Private CLI version level must match the version level that is downloadable via your ICP console, under ***Menu > Command Line Tools > Cloud Private CLI***.
 
 1. Get the source code of the helm chart
@@ -21,11 +22,11 @@ To install the chart, you'll need the [helm cli](https://www.ibm.com/support/kno
 
    `cloudctl login -a https://<cluster_domain> --skip-ssl-validation`
 
-4a. If you have Tiller available (CloudPak for MCM 1.3 or 2.0) install the Helm chart using helm v2 cli 
+4. If you have Tiller available (CloudPak for MCM 1.3 or 2.0) install the Helm chart using helm v2 cli 
 
    `helm install --name ldap-slap --namespace kube-public --values cp-openldap/values.yaml --tls`
 
-4b. For other CloudPaks render the chart and apply using oc apply
+   For other CloudPaks render the chart and apply using oc apply
 
    `helm template --name ldap-slap --namespace kube-public --values cp-openldap/values.yaml | kubectl apply -f -`
 
@@ -34,7 +35,6 @@ To install the chart, you'll need the [helm cli](https://www.ibm.com/support/kno
 Kubernetes Assets in this chart.
 
 **General Settings**
-General settings
 
 default values below
 
@@ -46,7 +46,6 @@ General:
 ```
 
 **OpenLDAP**
-OpenLDAP
 
 see details in [official site](http://www.openldap.org/)
 
@@ -78,6 +77,7 @@ OpenLdap:
 ```
 
 **phpLDAPadmin**
+
 LDAP admin UI
 
 see details in [official site](http://phpldapadmin.sourceforge.net/)
@@ -98,11 +98,11 @@ PhpLdapAdmin:
   Memory: "200Mi"
 ```
 
-## Setup IBM Cloud Private LDAP integration
+## Setup IBM Cloud Pak (Common Services) LDAP integration
 
-Detailed information about LDAP support in ICP avilable on the [IBM KnowledgeCenter](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/user_management/configure_ldap.html)
+Detailed information about LDAP support in IBM Cloud Pak foundational services (aka Common Services) avilable on the [IBM Documentation](https://www.ibm.com/docs/pl/cpfs?topic=users-configuring-ldap-connection)
 
-After the chart is deployed, follow these steps to setup LDAP authentication
+After the chart is deployed, follow these steps to setup LDAP connection
  
  1. From the helm release page take note of the OpenLDAP cluster ip and port for your deployment
  2. Navigate to ***Manage > Authentication*** and insert the following details
