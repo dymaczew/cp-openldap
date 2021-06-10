@@ -4,6 +4,7 @@ metadata:
   name: {{.Release.Name}}-admin
   labels:
     app: {{.Release.Name}}-admin
+  namespace: {{.Values.General.project}}
 spec:
 {{- if .Values.PhpLdapAdmin.NodePort }}
   type: NodePort
@@ -23,6 +24,7 @@ metadata:
   name: {{.Release.Name}}-admin
   labels:
     app: {{.Release.Name}}-admin
+  namespace: {{.Values.General.project}}
 spec:
   replicas: {{.Values.OpenLdap.Replicas}}
   selector:
@@ -32,7 +34,9 @@ spec:
     metadata:
       labels:
         app: {{.Release.Name}}-admin
+      namespace: {{.Values.General.project}}
     spec:
+      serviceAccountName: {{.Values.General.serviceAccount}}
       containers:
       - name: {{.Release.Name}}-admin
         image: {{.Values.PhpLdapAdmin.Image}}:{{.Values.PhpLdapAdmin.ImageTag}}
